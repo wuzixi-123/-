@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ===== 头部 ===== */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 2.2em;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.date {
+    font-size: 1em;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.emoji-bg {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 4em;
+    opacity: 0.2;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ===== 主内容 ===== */
+.main-content {
+    flex: 1;
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+/* ===== 输入区域 ===== */
+.input-section {
+    margin-bottom: 35px;
+}
+
+.input-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 15px;
+    border-radius: 18px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.input-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.task-input {
+    flex: 1;
+    border: none;
+    background: white;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.task-input::placeholder {
+    color: #999;
+}
+
+.task-input:focus {
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== 任务区域 ===== */
+.tasks-section {
+    margin-bottom: 35px;
+}
+
+.section-title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 700;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.task-item.completed {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #666;
+    opacity: 0.7;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: #667eea;
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-text {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #333;
+    word-break: break-word;
+    transition: all 0.3s ease;
+}
+
+.task-time {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.empty-emoji {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    font-size: 1em;
+}
+
+/* ===== 统计卡片 ===== */
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.stat-emoji {
+    font-size: 2em;
+}
+
+.stat-card div {
+    text-align: left;
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.stat-number {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #667eea;
+}
+
+/* ===== 底部 ===== */
+.footer {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.95em;
+    font-weight: 500;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8em;
+    }
+
+    .input-card {
+        flex-direction: column;
+    }
+
+    .task-item {
+        flex-wrap: wrap;
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        justify-content: center;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+}
+
+/* ===== 动画 ===== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: slideIn 0.3s ease;
+}

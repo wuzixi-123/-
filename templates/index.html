@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 今天做了什么</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">📝 今天做了什么</h1>
+                <p class="date" id="currentDate"></p>
+            </div>
+            <div class="emoji-bg">😊</div>
+        </header>
+
+        <main class="main-content">
+            <!-- 输入区域 -->
+            <div class="input-section">
+                <div class="input-card">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="写下你今天做的事情..."
+                        autocomplete="off"
+                    >
+                    <button id="addBtn" class="add-btn">➕ 添加</button>
+                </div>
+            </div>
+
+            <!-- 任务列表 -->
+            <div class="tasks-section">
+                <h2 class="section-title">📋 今日任务</h2>
+                <div id="taskList" class="task-list">
+                    <div class="empty-state">
+                        <span class="empty-emoji">🎉</span>
+                        <p>还没有任务呢，先添加一个吧！</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 统计信息 -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <span class="stat-emoji">✅</span>
+                    <div>
+                        <p class="stat-label">已完成</p>
+                        <p class="stat-number" id="completedCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-emoji">⏳</span>
+                    <div>
+                        <p class="stat-label">待进行</p>
+                        <p class="stat-number" id="pendingCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-emoji">📊</span>
+                    <div>
+                        <p class="stat-label">总数</p>
+                        <p class="stat-number" id="totalCount">0</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>✨ 每一天都是新的开始 ✨</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
