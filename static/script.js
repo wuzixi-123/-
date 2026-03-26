@@ -232,3 +232,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+    // === 留言板功能 ===
+    async function loadChatMessages() {
+        try {
+            const response = await fetch('/api/messages');
+            const msgs = await response.json();
+            const chatBox = document.getElementById('chatMessages');
+        
+            chatBox.innerHTML = msgs.map(msg => `
+            <div class="msg-bubble ${msg.role === 'user' ? 'msg-user' : 'msg-admin'}">
+                <div style="font-size: 0.7em; opacity: 0.7; margin-bottom: 2px;">${msg.time}</div>
+                ${escapeHtml(msg.content)}
+            </div>
+        `).join('');
+            // 自动滚动到最底部
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+            console.error('加载留言失败:', error);
+        }
+    }
+
+    async function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const content = input.value.trim();
+        if (!content) return;
+
+        try {
+            const response = await fetch('/api/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content })
+            });
+
+            if (response.ok) {
+                input.value = '';
+                loadChatMessages(); // 重新加载消息
+            }
+        } catch (error) {
+            console.error('发送留言失败:', error);
+        }
+    }
+
+    // 绑定回车发送留言
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatInput = document.getElementById('chatInput');
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+        }
+        // 每 10 秒去后台查一下有没有站长的最新回复
+        setInterval(loadChatMessages, 10000);
+        loadChatMessages();
+    });

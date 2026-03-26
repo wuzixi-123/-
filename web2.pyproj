@@ -30,6 +30,7 @@
     <Content Include="requirements.txt" />
     <Content Include="static\script.js" />
     <Content Include="static\style.css" />
+    <Content Include="templates\admin.html" />
     <Content Include="templates\index.html" />
   </ItemGroup>
   <ItemGroup>

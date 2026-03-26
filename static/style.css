@@ -303,3 +303,89 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* 聊天悬浮框样式 */
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+.chat-body {
+    display: none;
+    flex-direction: column;
+    height: 350px;
+}
+
+    .chat-body.active {
+        display: flex;
+    }
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+}
+
+.msg-bubble {
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 0.9em;
+}
+
+.msg-user {
+    background: #667eea;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.msg-admin {
+    background: #e1e1e1;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+    .chat-input-area input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        outline: none;
+        padding-left: 15px;
+    }
+
+    .chat-input-area button {
+        background: none;
+        border: none;
+        color: #667eea;
+        font-weight: bold;
+        padding: 0 10px;
+        cursor: pointer;
+    }

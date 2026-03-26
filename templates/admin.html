@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>站长后台 - 消息管理</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .user-box {
+            background: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .msg {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+            .msg.user {
+                background: #e3f2fd;
+                margin-right: auto;
+            }
+
+            .msg.admin {
+                background: #e8f5e9;
+                margin-left: auto;
+                text-align: right;
+            }
+
+        .reply-box {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>👨‍💻 站长留言管理后台</h1>
+    {% for user_id, messages in all_messages.items() %}
+    <div class="user-box">
+        <h3>用户 ID: {{ user_id[:8] }}...</h3>
+        <div style="display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; background:#fafafa; padding:10px;">
+            {% for msg in messages %}
+            <div class="msg {{ msg.role }}">
+                <small style="color:#888;">{{ msg.time }}</small><br>
+                <b>{{ '用户' if msg.role == 'user' else '我' }}:</b> {{ msg.content }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="reply-box">
+            <input type="text" id="reply_{{ user_id }}" placeholder="回复这位用户...">
+            <button onclick="sendReply('{{ user_id }}')">发送回复</button>
+        </div>
+    </div>
+    {% else %}
+    <p>暂时还没有任何人留言哦~</p>
+    {% endfor %}
+
+    <script>
+        async function sendReply(userId) {
+            const input = document.getElementById('reply_' + userId);
+            const content = input.value.trim();
+            if (!content) return;
+
+            const res = await fetch('/admin/reply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: userId, content: content })
+            });
+            if (res.ok) window.location.reload(); // 发送成功后刷新页面看最新消息
+        }
+    </script>
+</body>
+</html>
