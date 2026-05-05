@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 心语天地</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #5B9BD5;
+            --secondary-color: #70AD47;
+            --accent-color: #FFC000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F5F5F5;
+            --border-color: #E0E0E0;
+            --error-color: #D32F2F;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .form-side {
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-side h1 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .form-side p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.1);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-group input.error {
+            border-color: var(--error-color);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .remember-forgot a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox input {
+            width: auto;
+            margin: 0;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(91, 155, 213, 0.4);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--text-light);
+            font-size: 13px;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .hero-side {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-side h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-side p {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hero-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .hero-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .hero-features li {
+            margin: 10px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-features li::before {
+            content: '✓';
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .logo {
+                top: 15px;
+                left: 15px;
+                font-size: 22px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-side {
+                padding: 40px 30px;
+            }
+
+            .hero-side {
+                display: none;
+            }
+
+            .form-side h1 {
+                font-size: 28px;
+            }
+        }
+
+        .success-message {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo">
+        <span class="logo-icon">💙</span>
+        <span>心语天地</span>
+    </a>
+
+    <div class="container">
+        <div class="form-side">
+            <h1>欢迎回来</h1>
+            <p>登录你的账户，继续你的心理健康之旅</p>
+
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" placeholder="输入用户名" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" placeholder="输入密码" required>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember">
+                        <span>记住我</span>
+                    </label>
+                    <a href="#">忘记密码？</a>
+                </div>
+
+                <button type="submit" class="btn-login">登录</button>
+            </form>
+
+            <div class="signup-link">
+                还没有账户？<a href="/register">立即注册</a>
+            </div>
+        </div>
+
+        <div class="hero-side">
+            <div class="hero-icon">💙</div>
+            <h2>心语天地</h2>
+            <p>你不必独自面对</p>
+            <p style="font-size: 14px; opacity: 0.8;">获取专业的心理支持和温暖的社区陪伴</p>
+            <ul class="hero-features">
+                <li>专业心理咨询师指导</li>
+                <li>24小时应急支持热线</li>
+                <li>与他人分享和交流</li>
+                <li>隐私安全有保障</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // 清除错误消息
+            document.getElementById('usernameError').classList.remove('show');
+            document.getElementById('passwordError').classList.remove('show');
+            document.getElementById('username').classList.remove('error');
+            document.getElementById('password').classList.remove('error');
+
+            // 验证
+            if (!username) {
+                showError('usernameError', '用户名不能为空');
+                return;
+            }
+            if (!password) {
+                showError('passwordError', '密码不能为空');
+                return;
+            }
+
+            // 禁用按钮
+            const btn = document.querySelector('.btn-login');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // 登录成功
+                    showSuccess('登录成功，正在跳转...');
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1500);
+                } else {
+                    // 登录失败
+                    showError('usernameError', data.message || '登录失败，请检查用户名和密码');
+                    document.getElementById('username').classList.add('error');
+                    document.getElementById('password').classList.add('error');
+                }
+            } catch (error) {
+                showError('usernameError', '登录出错，请稍后重试');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.classList.add('show');
+        }
+
+        function showSuccess(message) {
+            const element = document.getElementById('successMessage');
+            element.textContent = message;
+            element.classList.add('show');
+        }
+    </script>
+</body>
+</html>

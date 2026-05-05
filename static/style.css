@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 20px;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 2.2em;
+    margin: 0;
+    font-weight: 700;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 12px;
+}
+
+.user-display {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.switch-user-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-user-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.date {
+    font-size: 0.95em;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.main-content {
+    padding: 30px 20px;
+}
+
+.input-section {
+    margin-bottom: 30px;
+}
+
+.input-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 15px;
+    border-radius: 18px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.task-input {
+    flex: 1;
+    border: none;
+    background: white;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 1em;
+    outline: none;
+}
+
+.task-input:focus {
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+}
+
+.section-title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 700;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.task-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.task-item.completed {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #666;
+    opacity: 0.7;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: #667eea;
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-text {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #333;
+    word-break: break-word;
+}
+
+.task-time {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.empty-emoji {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-emoji {
+    font-size: 2em;
+}
+
+.stat-card div {
+    text-align: left;
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.stat-number {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.footer {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .header-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+
+    .user-section {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .input-card {
+        flex-direction: column;
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+}
+/* 聊天悬浮框样式 */
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+.chat-body {
+    display: none;
+    flex-direction: column;
+    height: 350px;
+}
+
+    .chat-body.active {
+        display: flex;
+    }
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+}
+
+.msg-bubble {
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 0.9em;
+}
+
+.msg-user {
+    background: #667eea;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.msg-admin {
+    background: #e1e1e1;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+    .chat-input-area input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        outline: none;
+        padding-left: 15px;
+    }
+
+    .chat-input-area button {
+        background: none;
+        border: none;
+        color: #667eea;
+        font-weight: bold;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+/* ===============================
+   新篇章按钮 & 弹簧动效
+=============================== */
+.spring-button-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.spring-btn {
+    display: inline-block;
+    padding: 16px 45px;
+    font-size: 1.2em;
+    font-weight: 800;
+    color: white;
+    /* 采用一个亮眼的渐变色，让它和主界面的蓝紫色形成对比 */
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 15px rgba(255, 117, 140, 0.4);
+    /* ⬇️ 这里就是弹簧动效的灵魂所在 ⬇️ */
+    /* cubic-bezier(0.68, -0.55, 0.265, 1.55) 能够模拟出超出然后再回弹的物理效果 */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+    /* 鼠标放上去时的效果 (变大 + 弹簧回弹) */
+    .spring-btn:hover {
+        transform: scale(1.15); /* 放大 1.15 倍 */
+        box-shadow: 0 15px 25px rgba(255, 117, 140, 0.6);
+    }
+
+    /* 鼠标点击按下去时的效果 (瞬间缩小，模拟按压) */
+    .spring-btn:active {
+        transform: scale(0.95);
+        transition: all 0.1s; /* 按下去的动作要快，不需要弹簧效果 */
+        box-shadow: 0 4px 10px rgba(255, 117, 140, 0.3);
+    }

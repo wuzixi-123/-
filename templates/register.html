@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - 心语天地</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #5B9BD5;
+            --secondary-color: #70AD47;
+            --accent-color: #FFC000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F5F5F5;
+            --border-color: #E0E0E0;
+            --error-color: #D32F2F;
+            --success-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .form-side {
+            padding: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-side h1 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .form-side p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: var(--error-color);
+        }
+
+        .form-group input.success {
+            border-color: var(--success-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            color: var(--success-color);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .terms {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .terms a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(91, 155, 213, 0.4);
+        }
+
+        .btn-register:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .hero-side {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-side h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-side p {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hero-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .hero-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .hero-features li {
+            margin: 10px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-features li::before {
+            content: '✓';
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .password-strength {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--error-color);
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak { background: var(--error-color); }
+        .strength-medium { background: var(--accent-color); }
+        .strength-strong { background: var(--success-color); }
+
+        .success-message {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .logo {
+                top: 15px;
+                left: 15px;
+                font-size: 22px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-side {
+                padding: 30px 25px;
+            }
+
+            .hero-side {
+                display: none;
+            }
+
+            .form-side h1 {
+                font-size: 28px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo">
+        <span class="logo-icon">💙</span>
+        <span>心语天地</span>
+    </a>
+
+    <div class="container">
+        <div class="form-side">
+            <h1>创建账户</h1>
+            <p>加入心语天地社区，开始你的心理健康之旅</p>
+
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" placeholder="3-20个字符，字母/数字/下划线" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">邮箱地址</label>
+                    <input type="email" id="email" name="email" placeholder="输入有效的邮箱地址" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" placeholder="至少6个字符" required>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">确认密码</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="再次输入密码" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <div class="terms">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span>我已阅读并同意<a href="#">服务条款</a>和<a href="#">隐私政策</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-register">创建账户</button>
+            </form>
+
+            <div class="login-link">
+                已有账户？<a href="/login">立即登录</a>
+            </div>
+        </div>
+
+        <div class="hero-side">
+            <div class="hero-icon">💙</div>
+            <h2>心语天地</h2>
+            <p>你不必独自面对</p>
+            <p style="font-size: 14px; opacity: 0.8;">获取专业的心理支持和温暖的社区陪伴</p>
+            <ul class="hero-features">
+                <li>完全免费的心理咨询</li>
+                <li>24小时应急支持热线</li>
+                <li>安全私密的讨论空间</li>
+                <li>专业医学团队指导</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 密码强度检查
+        document.getElementById('password').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strength = checkPasswordStrength(password);
+            updateStrengthBar(strength);
+        });
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[!@#$%^&*]/.test(password)) strength++;
+            return strength;
+        }
+
+        function updateStrengthBar(strength) {
+            const fill = document.getElementById('strengthFill');
+            const text = document.getElementById('passwordStrength');
+            const width = (strength / 5) * 100;
+            fill.style.width = width + '%';
+
+            if (strength <= 1) {
+                fill.className = 'strength-fill strength-weak';
+                text.textContent = '弱';
+            } else if (strength <= 3) {
+                fill.className = 'strength-fill strength-medium';
+                text.textContent = '中等';
+            } else {
+                fill.className = 'strength-fill strength-strong';
+                text.textContent = '强';
+            }
+        }
+
+        // 表单提交
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // 获取表单数据
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+
+            // 清除所有错误
+            clearErrors();
+
+            // 验证
+            if (!username) {
+                showError('usernameError', '用户名不能为空');
+                return;
+            }
+            if (!email) {
+                showError('emailError', '邮箱不能为空');
+                return;
+            }
+            if (!validateEmail(email)) {
+                showError('emailError', '邮箱格式不正确');
+                return;
+            }
+            if (!password) {
+                showError('passwordError', '密码不能为空');
+                return;
+            }
+            if (password.length < 6) {
+                showError('passwordError', '密码至少需要6个字符');
+                return;
+            }
+            if (password !== confirmPassword) {
+                showError('confirmPasswordError', '两次输入的密码不一致');
+                return;
+            }
+            if (!agreeTerms) {
+                alert('请同意服务条款和隐私政策');
+                return;
+            }
+
+            // 禁用按钮
+            const btn = document.querySelector('.btn-register');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showSuccess('注册成功，正在跳转...');
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1500);
+                } else {
+                    showError('usernameError', data.message || '注册失败，请稍后重试');
+                }
+            } catch (error) {
+                showError('usernameError', '注册出错，请稍后重试');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.classList.add('show');
+            // 给输入框加红色边框
+            const inputId = elementId.replace('Error', '');
+            document.getElementById(inputId)?.classList.add('error');
+        }
+
+        function showSuccess(message) {
+            const element = document.getElementById('successMessage');
+            element.textContent = message;
+            element.classList.add('show');
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.remove('show');
+            });
+            document.querySelectorAll('input').forEach(el => {
+                el.classList.remove('error');
+            });
+        }
+    </script>
+</body>
+</html>

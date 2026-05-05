@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心语天地 - 抑郁症心理援助公益平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #5B9BD5;
+            --secondary-color: #70AD47;
+            --accent-color: #FFC000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F5F5F5;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        /* 导航栏 */
+        nav {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #4a7fa7 100%);
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        nav a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #FFB400;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #70AD47 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        /* 主要内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        section {
+            padding: 80px 40px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        /* 特性卡片 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* 统计数据 */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #70AD47 100%);
+            color: white;
+            padding: 60px 40px;
+            margin: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* 关于区域 */
+        .about-section {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #70AD47 100%);
+            border-radius: 10px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: white;
+        }
+
+        /* 底部 */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 20px;
+                flex-direction: column;
+                height: auto;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 50px 20px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            section h2 {
+                font-size: 28px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-image {
+                height: 300px;
+                font-size: 80px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <a href="/" class="logo">
+            <span class="logo-icon">💙</span>
+            <span>心语天地</span>
+        </a>
+        <ul>
+            <li><a href="#features">功能介绍</a></li>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="/login" class="btn btn-secondary">登录</a>
+            <a href="/register" class="btn btn-primary">注册</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>💙 心语天地</h1>
+        <p>一个温暖、安全的心理援助公益平台<br>为每一个需要帮助的人提供专业的心理支持与陪伴</p>
+        <div class="hero-buttons">
+            <a href="/register" class="btn btn-primary btn-large">立即注册</a>
+            <a href="#features" class="btn btn-secondary btn-large">了解更多</a>
+        </div>
+    </section>
+
+    <!-- 特性介绍 -->
+    <section class="container" id="features">
+        <h2>我们的服务</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>心理咨询</h3>
+                <p>专业心理咨询师团队在线提供免费或低价的心理援助和建议</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>知识库</h3>
+                <p>丰富的心理健康知识、自我调节方法和应对技巧</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>社区交流</h3>
+                <p>与志同道合的人们分享经历，互相支持和鼓励</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>康复计划</h3>
+                <p>个性化的康复计划指导和日常进度跟踪</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌙</div>
+                <h3>应急支持</h3>
+                <p>24小时应急热线，及时提供心理危机干预</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>隐私保护</h3>
+                <p>严格保护用户隐私，所有信息都加密存储</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>50,000+</h3>
+                    <p>活跃用户</p>
+                </div>
+                <div class="stat-item">
+                    <h3>200+</h3>
+                    <p>心理咨询师</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100,000+</h3>
+                    <p>咨询记录</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99.8%</h3>
+                    <p>用户满意度</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>关于心语天地</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>我们的使命</h3>
+                    <p>心语天地致力于为全球抑郁症患者提供优质的心理援助服务。我们相信，通过专业的心理咨询、社区支持和正确的康复方法，每个人都能战胜心理疾病。</p>
+                    <p>我们的团队由资深心理咨询师、医学专家和心理学研究人员组成，拥有超过10年的临床经验。</p>
+                    <p>如果你正在经历抑郁症的困扰，你不必独自承受。我们准备好倾听你的故事，陪伴你度过难关。</p>
+                </div>
+                <div class="about-image">💙</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="container" id="contact">
+        <h2>联系我们</h2>
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="color: var(--text-light); margin: 20px 0;">
+                <strong>电子邮件：</strong> support@xinyyworld.com<br>
+                <strong>应急热线：</strong> 400-161-9995 (24小时)<br>
+                <strong>地址：</strong> 中国 · 城市
+            </p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer>
+        <p>&copy; 2024 心语天地 - 抑郁症心理援助公益平台</p>
+        <p>
+            <a href="#">服务条款</a> | 
+            <a href="#">隐私政策</a> | 
+            <a href="#">关于我们</a> | 
+            <a href="#">联系我们</a>
+        </p>
+        <p style="margin-top: 20px; opacity: 0.8;">
+            如果你或你认识的人正在经历心理危机，请立即拨打应急热线。
+        </p>
+    </footer>
+</body>
+</html>
